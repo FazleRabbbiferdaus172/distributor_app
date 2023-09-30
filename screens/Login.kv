@@ -1,0 +1,40 @@
+<LoginScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: "20dp"
+        adaptive_height: True
+        size_hint_x: .5
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDLabel:
+            text: 'Login'
+            halign: 'center'
+            font_size: 24
+            color: app.theme_cls.primary_color
+
+        MDTextField:
+            id: username_input
+            required: True
+            text: root.username_input
+            hint_text: 'Username'
+            size_hint_y: None
+            icon_left: "account-badge"
+            mode: "rectangle"
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDTextField:
+            id: password_input
+            hint_text: 'Password'
+            text: root.password_input
+            password: True
+            icon_left: "key-variant"
+            required: True
+            mode: "rectangle"
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDRaisedButton:
+            text: 'Login'
+            size_hint_y: None
+            height: 40
+            size_hint_x: 1
+            on_press: root.do_login()
