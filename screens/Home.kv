@@ -1,0 +1,46 @@
+<HomeScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        # Top Navigation Bar
+        MDToolbar:
+            title: "Home Page"
+            elevation: 10
+            left_action_items: [["menu", lambda x: app.toggle_nav_drawer()]]
+
+        # Middle Section (DataTable)
+        MDCard:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: "400dp"
+            pos_hint: {"center_x": 0.5}
+
+            MDDataTable:
+                size_hint: 1, 1
+                column_data:
+                    [("Column 1", dp(30)), ("Column 2", dp(30)), ("Column 3", dp(30))]
+                row_data:
+                    (f"Row {i}", f"Value {i}", f"Value {i}") for i in range(1, 6)
+                check: True
+
+        # Bottom Buttons
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: "50dp"
+            padding: "10dp"
+            spacing: "10dp"
+
+            MDRaisedButton:
+                text: "Button 1"
+                on_press: print("Button 1 pressed")
+
+            MDRaisedButton:
+                text: "Button 2"
+                on_press: print("Button 2 pressed")
+
+            MDRaisedButton:
+                text: "Button 3"
+                on_press: print("Button 3 pressed")
+
+
