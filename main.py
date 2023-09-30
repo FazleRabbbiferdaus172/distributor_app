@@ -3,7 +3,7 @@ from kivy.lang import Builder
 from KivyMD.kivymd.app import MDApp
 
 Builder.load_file('screens/Login.kv')
-Builder.load_file('screens/Home.kv')
+# Builder.load_file('screens/Home.kv')
 
 from screens.login import LoginScreen
 from screens.home import HomeScreen
