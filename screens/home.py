@@ -48,15 +48,24 @@ class HomeScreen(Screen):
             pos_hint={"center_x": .5}
         )
         bottom_layout.add_widget(
-            MDRaisedButton(text="Add data", on_press=lambda x: print('hi'))
+            MDRaisedButton(text="Add data", on_press=self.add_data_pressed)
         )
         bottom_layout.add_widget(
-            MDRaisedButton(text="Edit data", on_press=lambda x: print('hi'))
+            MDRaisedButton(text="Edit data", on_press=self.edit_data_pressed)
         )
         bottom_layout.add_widget(
-            MDRaisedButton(text="Remove data", on_press=lambda x: print('hi'))
+            MDRaisedButton(text="Remove data", on_press=self.remove_data_pressed)
         )
         layout.add_widget(topAppBar)
         layout.add_widget(dataTable)
         layout.add_widget(bottom_layout)
         self.add_widget(layout)
+
+    def add_data_pressed(self, button):
+        print('Added data')
+
+    def edit_data_pressed(self, button):
+        print('edited data')
+
+    def remove_data_pressed(self, button):
+        print('removed data')
