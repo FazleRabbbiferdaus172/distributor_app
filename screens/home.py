@@ -22,9 +22,9 @@ class HomeScreen(Screen):
             size_hint=(.9, .9),
             pos_hint={"center_x": .5, "center_y": .5},
             column_data=[
-                ("No.", .2),
-                ("Status", .4),
-                ("Signal Name", .4),
+                ("No.", dp(20)),
+                ("Status", dp(50)),
+                ("Signal Name", dp(50)),
             ],
             row_data=[
                 (
