@@ -18,7 +18,7 @@ class HomeScreen(Screen):
         topAppBar = MDTopAppBar(title='Home')
 
         # middle section
-        dataTable = MDDataTable(
+        self.data_tables = MDDataTable(
             size_hint=(.9, .9),
             pos_hint={"center_x": .5, "center_y": .5},
             column_data=[
@@ -40,12 +40,10 @@ class HomeScreen(Screen):
 
         # bottom section
         bottom_layout = MDBoxLayout(
-            orientation="horizontal",
-            size_hint_y=None,
-            height=dp(48),
-            padding=dp(8),
-            spacing=dp(8),
-            pos_hint={"center_x": .5}
+            pos_hint={"center_x": 0.5},
+            adaptive_size=True,
+            padding="24dp",
+            spacing="24dp",
         )
         bottom_layout.add_widget(
             MDRaisedButton(text="Add data", on_press=self.add_data_pressed)
@@ -57,15 +55,16 @@ class HomeScreen(Screen):
             MDRaisedButton(text="Remove data", on_press=self.remove_data_pressed)
         )
         layout.add_widget(topAppBar)
-        layout.add_widget(dataTable)
+        layout.add_widget(self.data_tables)
         layout.add_widget(bottom_layout)
         self.add_widget(layout)
 
     def add_data_pressed(self, button):
-        print('Added data')
+        self.data_tables.add_row(("1", "2", "3"))
 
     def edit_data_pressed(self, button):
-        print('edited data')
+        self.data_tables.add_row(("1", "2", "3"))
 
     def remove_data_pressed(self, button):
-        print('removed data')
+        if len(self.data_tables.row_data) > 1:
+            self.data_tables.remove_row(self.data_tables.row_data[-1])
