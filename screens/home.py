@@ -61,9 +61,11 @@ class HomeScreen(Screen):
 
     def add_data_pressed(self, button):
         self.data_tables.add_row(("1", "2", "3"))
+        self.manager.current = 'login'
 
     def edit_data_pressed(self, button):
         self.data_tables.add_row(("1", "2", "3"))
+        self.manager.current = 'login'
 
     def remove_data_pressed(self, button):
         if len(self.data_tables.row_data) > 1:
