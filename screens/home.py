@@ -1,11 +1,42 @@
 from kivy.metrics import dp
-
 from kivy.uix.screenmanager import Screen
-
+from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.textfield import MDTextField
 from KivyMD.kivymd.uix.boxlayout import MDBoxLayout
 from KivyMD.kivymd.uix.button import MDRaisedButton
 from KivyMD.kivymd.uix.datatables import MDDataTable
 from KivyMD.kivymd.uix.toolbar import MDTopAppBar
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.dialog import MDDialog
+
+KV = '''
+<Content>
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "420dp"
+
+    MDTextField:
+        hint_text: "A"
+
+    MDTextField:
+        hint_text: "B"
+        
+    MDTextField:
+        hint_text: "C"
+
+
+MDFloatLayout:
+
+    MDFlatButton:
+        text: "ALERT DIALOG"
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        on_release: app.show_confirmation_dialog()
+'''
+
+
+class Content(BoxLayout):
+    pass
 
 
 class HomeScreen(Screen):
@@ -60,8 +91,41 @@ class HomeScreen(Screen):
         self.add_widget(layout)
 
     def add_data_pressed(self, button):
-        self.data_tables.add_row(("1", "2", "3"))
-        self.manager.current = 'login'
+        if True:
+            dialog = MDDialog(
+                title="Form",
+                type="custom",
+                content_cls=MDBoxLayout(
+                    MDTextField(
+                        hint_text="A",
+                    ),
+                    MDTextField(
+                        hint_text="S",
+                    ),
+                    MDTextField(
+                        hint_text="D",
+                    ),
+                    orientation="vertical",
+                    spacing="12dp",
+                    size_hint_y=None,
+                    height="180dp",
+                ),
+                buttons=[
+                    MDFlatButton(
+                        text="CANCEL",
+                        theme_text_color="Custom",
+                    ),
+                    MDFlatButton(
+                        text="OK",
+                        theme_text_color="Custom",
+                        on_press=self.on_ok
+                    ),
+                ],
+            )
+        dialog.open()
+
+    def on_ok(self,button):
+        pass
 
     def edit_data_pressed(self, button):
         self.data_tables.add_row(("1", "2", "3"))
