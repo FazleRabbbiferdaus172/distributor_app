@@ -40,6 +40,7 @@ class Content(BoxLayout):
 
 
 class HomeScreen(Screen):
+    dialog = None
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -92,17 +93,20 @@ class HomeScreen(Screen):
 
     def add_data_pressed(self, button):
         if True:
-            dialog = MDDialog(
+            self.dialog = MDDialog(
                 title="Form",
                 type="custom",
                 content_cls=MDBoxLayout(
                     MDTextField(
+                        id="input_a",
                         hint_text="A",
                     ),
                     MDTextField(
+                        id="input_b",
                         hint_text="S",
                     ),
                     MDTextField(
+                        id="input_c",
                         hint_text="D",
                     ),
                     orientation="vertical",
@@ -122,9 +126,11 @@ class HomeScreen(Screen):
                     ),
                 ],
             )
-        dialog.open()
+        self.dialog.open()
 
     def on_ok(self,button):
+        self.data_tables.add_row((self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text, self.dialog.content_cls.ids.input_c.text))
+        self.dialog.dismiss(force=True)
         pass
 
     def edit_data_pressed(self, button):
