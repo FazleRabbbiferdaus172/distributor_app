@@ -139,13 +139,13 @@ class HomeScreen(Screen):
         self.dialog.dismiss(force=True)
 
     def on_edit_ok(self, button):
-        self.data_tables.row_data[int(self.row_edit_index)] = (self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text, self.dialog.content_cls.ids.input_c.text)
+        self.data_tables.row_data[self.row_edit_index] = (self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text, self.dialog.content_cls.ids.input_c.text)
         self.dialog.dismiss(force=True)
 
     def edit_data_pressed(self, button=None, something=None):
         if True:
-            current_row_data = something.table.row_data[int(something.Index)]
-            self.row_edit_index = something.Index
+            self.row_edit_index = int(something.Index) // len(button.column_data)
+            current_row_data = self.data_tables.row_data[self.row_edit_index]
             self.dialog = MDDialog(
                 title="Form",
                 type="custom",
@@ -185,5 +185,5 @@ class HomeScreen(Screen):
         self.dialog.open()
 
     def remove_data_pressed(self, button):
-        if len(self.data_tables.row_data) > 1:
+        if len(self.data_tables.row_data):
             self.data_tables.remove_row(self.data_tables.row_data[-1])
