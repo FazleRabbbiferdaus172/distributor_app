@@ -16,5 +16,4 @@ class LoginScreen(MDScreen):
             print("Login successful!")
             self.manager.current = 'home'
         else:
-            print(username, password)
             print("Invalid login credentials.")
