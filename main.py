@@ -8,6 +8,7 @@ Builder.load_file('screens/Login.kv')
 from screens.login import LoginScreen
 from screens.home import HomeScreen
 
+
 class DistributorApp(MDApp):
     def build(self):
         self.theme_cls.theme_style = "Dark"
@@ -16,6 +17,7 @@ class DistributorApp(MDApp):
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(HomeScreen(name='home'))
         return sm
+
 
 if __name__ == '__main__':
     DistributorApp().run()

@@ -41,6 +41,7 @@ class Content(BoxLayout):
 
 class HomeScreen(Screen):
     dialog = None
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -130,16 +131,20 @@ class HomeScreen(Screen):
             )
         self.dialog.open()
 
-    def on_add_ok(self,button):
-        self.data_tables.add_row((self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text, self.dialog.content_cls.ids.input_c.text))
-        self.dialog.dismiss(force=True)
-
-    def on_edit_ok(self,button):
-        self.data_tables.add_row((self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text, self.dialog.content_cls.ids.input_c.text))
+    def on_add_ok(self, button):
+        self.data_tables.add_row((self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text,
+                                  self.dialog.content_cls.ids.input_c.text))
         self.dialog.dismiss(force=True)
 
     def on_edit_ok(self, button):
-        self.data_tables.row_data[self.row_edit_index] = (self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text, self.dialog.content_cls.ids.input_c.text)
+        self.data_tables.add_row((self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text,
+                                  self.dialog.content_cls.ids.input_c.text))
+        self.dialog.dismiss(force=True)
+
+    def on_edit_ok(self, button):
+        self.data_tables.row_data[self.row_edit_index] = (
+        self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text,
+        self.dialog.content_cls.ids.input_c.text)
         self.dialog.dismiss(force=True)
 
     def edit_data_pressed(self, button=None, something=None):
