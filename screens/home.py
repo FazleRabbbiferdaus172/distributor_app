@@ -52,6 +52,7 @@ class HomeScreen(Screen):
 
         # middle section
         self.data_tables = MDDataTable(
+            check=True,
             size_hint=(.9, .9),
             pos_hint={"center_x": .5, "center_y": .5},
             column_data=[
@@ -82,9 +83,6 @@ class HomeScreen(Screen):
         )
         bottom_layout.add_widget(
             MDRaisedButton(text="Add data", on_press=self.add_data_pressed)
-        )
-        bottom_layout.add_widget(
-            MDRaisedButton(text="Edit data", on_press=self.edit_data_pressed)
         )
         bottom_layout.add_widget(
             MDRaisedButton(text="Remove data", on_press=self.remove_data_pressed)
