@@ -75,21 +75,21 @@ class HomeScreen(Screen):
         self.data_tables.bind(on_row_press=self.edit_data_pressed)
 
         # bottom section
-        bottom_layout = MDBoxLayout(
+        self.bottom_layout = MDBoxLayout(
             pos_hint={"center_x": 0.5},
             adaptive_size=True,
             padding="24dp",
             spacing="24dp",
         )
-        bottom_layout.add_widget(
+        self.bottom_layout.add_widget(
             MDRaisedButton(text="Add data", on_press=self.add_data_pressed)
         )
-        bottom_layout.add_widget(
+        self.bottom_layout.add_widget(
             MDRaisedButton(text="Remove data", on_press=self.remove_data_pressed)
         )
         layout.add_widget(topAppBar)
         layout.add_widget(self.data_tables)
-        layout.add_widget(bottom_layout)
+        layout.add_widget(self.bottom_layout)
         self.add_widget(layout)
 
     def add_data_pressed(self, button):
@@ -188,5 +188,10 @@ class HomeScreen(Screen):
             self.dialog.open()
 
     def remove_data_pressed(self, button):
-        if len(self.data_tables.row_data):
-            self.data_tables.remove_row(self.data_tables.row_data[-1])
+        checked_row_index_list = [cell.index // self.data_tables.table_data.total_col_headings for cell in self.data_tables.table_data.cell_row_obj_dict.values() if cell.ids.check.state == 'down']
+        # if len(self.data_tables.row_data):
+        #     self.data_tables.remove_row(self.data_tables.row_data[-1])
+        rows_to_remove = [self.data_tables.row_data[i] for i in checked_row_index_list]
+        for row_to_remove in rows_to_remove:
+            self.data_tables.remove_row(row_to_remove)
+
