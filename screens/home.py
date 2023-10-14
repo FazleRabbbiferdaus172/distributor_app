@@ -146,8 +146,8 @@ class HomeScreen(Screen):
         self.dialog.dismiss(force=True)
 
     def edit_data_pressed(self, button=None, something=None):
-        if True:
-            self.row_edit_index = int(something.Index) // len(button.column_data)
+        self.row_edit_index = int(something.Index) // len(button.column_data)
+        if int(something.Index) % len(button.column_data):
             current_row_data = self.data_tables.row_data[self.row_edit_index]
             self.dialog = MDDialog(
                 title="Form",
@@ -185,7 +185,7 @@ class HomeScreen(Screen):
                     ),
                 ],
             )
-        self.dialog.open()
+            self.dialog.open()
 
     def remove_data_pressed(self, button):
         if len(self.data_tables.row_data):
