@@ -188,10 +188,13 @@ class HomeScreen(Screen):
             self.dialog.open()
 
     def remove_data_pressed(self, button):
-        checked_row_index_list = [cell.index // self.data_tables.table_data.total_col_headings for cell in self.data_tables.table_data.cell_row_obj_dict.values() if cell.ids.check.state == 'down']
+        checked_row_index_list = [(cell, cell.index // self.data_tables.table_data.total_col_headings) for cell in self.data_tables.table_data.cell_row_obj_dict.values() if cell.ids.check.state == 'down']
         # if len(self.data_tables.row_data):
         #     self.data_tables.remove_row(self.data_tables.row_data[-1])
-        rows_to_remove = [self.data_tables.row_data[i] for i in checked_row_index_list]
+        rows_to_remove = []
+        for i,j in checked_row_index_list:
+            i.ids.check.state = "normal"
+            rows_to_remove.append(self.data_tables.row_data[j])
         for row_to_remove in rows_to_remove:
             self.data_tables.remove_row(row_to_remove)
 
