@@ -60,16 +60,7 @@ class HomeScreen(Screen):
                 ("Status", dp(50)),
                 ("Signal Name", dp(50)),
             ],
-            row_data=[
-                (
-                    "1",
-                    ("alert", [255 / 256, 165 / 256, 0, 1], "No Signal"),
-                    "Astrid: NE shared managed",),
-                (
-                    "2",
-                    ("alert-circle", [1, 0, 0, 1], "Offline"),
-                    "Cosmo: prod shared ares",
-                )],
+            row_data=self.get_default_data()
         )
 
         self.data_tables.bind(on_row_press=self.edit_data_pressed)
@@ -91,6 +82,17 @@ class HomeScreen(Screen):
         layout.add_widget(self.data_tables)
         layout.add_widget(self.bottom_layout)
         self.add_widget(layout)
+
+    def get_default_data(self):
+        return [(
+                    "1",
+                    ("alert", [255 / 256, 165 / 256, 0, 1], "No Signal"),
+                    "Astrid: NE shared managed",),
+                (
+                    "2",
+                    ("alert-circle", [1, 0, 0, 1], "Offline"),
+                    "Cosmo: prod shared ares",
+                )]
 
     def add_data_pressed(self, button):
         if True:
