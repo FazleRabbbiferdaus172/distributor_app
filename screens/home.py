@@ -121,6 +121,7 @@ class HomeScreen(Screen):
                     MDFlatButton(
                         text="CANCEL",
                         theme_text_color="Custom",
+                        on_press=self.on_cancel
                     ),
                     MDFlatButton(
                         text="OK",
@@ -131,8 +132,12 @@ class HomeScreen(Screen):
             )
         self.dialog.open()
 
+    def on_cancel(self, button):
+        self.dialog.dismiss(force=True)
+
     def on_add_ok(self, button):
-        self.data_tables.add_row((self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text,
+        if self.dialog.content_cls.ids.input_a.text and self.dialog.content_cls.ids.input_b.text and self.dialog.content_cls.ids.input_c.text:
+            self.data_tables.add_row((self.dialog.content_cls.ids.input_a.text, self.dialog.content_cls.ids.input_b.text,
                                   self.dialog.content_cls.ids.input_c.text))
         self.dialog.dismiss(force=True)
 
@@ -179,6 +184,7 @@ class HomeScreen(Screen):
                     MDFlatButton(
                         text="CANCEL",
                         theme_text_color="Custom",
+                        on_press=self.on_cancel
                     ),
                     MDFlatButton(
                         text="OK",
