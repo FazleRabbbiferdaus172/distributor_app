@@ -85,14 +85,10 @@ class HomeScreen(Screen):
 
     def get_default_data(self):
         return [(
-                    "1",
-                    ("alert", [255 / 256, 165 / 256, 0, 1], "No Signal"),
-                    "Astrid: NE shared managed",),
-                (
-                    "2",
-                    ("alert-circle", [1, 0, 0, 1], "Offline"),
-                    "Cosmo: prod shared ares",
-                )]
+                    "+",
+                    'Add',
+                    ""),
+               ]
 
     def add_data_pressed(self, button):
         if True:
@@ -156,43 +152,79 @@ class HomeScreen(Screen):
         self.row_edit_index = int(something.Index) // len(button.column_data)
         if int(something.Index) % len(button.column_data):
             current_row_data = self.data_tables.row_data[self.row_edit_index]
-            self.dialog = MDDialog(
-                title="Form",
-                type="custom",
-                content_cls=MDBoxLayout(
-                    MDTextField(
-                        id="input_a",
-                        hint_text="A",
-                        text=str(current_row_data[0]),
+            if current_row_data[0] == '+':
+                self.dialog = MDDialog(
+                    title="Form",
+                    type="custom",
+                    content_cls=MDBoxLayout(
+                        MDTextField(
+                            id="input_a",
+                            hint_text="A",
+                        ),
+                        MDTextField(
+                            id="input_b",
+                            hint_text="S",
+                        ),
+                        MDTextField(
+                            id="input_c",
+                            hint_text="D",
+                        ),
+                        orientation="vertical",
+                        spacing="12dp",
+                        size_hint_y=None,
+                        height="180dp",
                     ),
-                    MDTextField(
-                        id="input_b",
-                        hint_text="S",
-                        text=str(current_row_data[1]),
+                    buttons=[
+                        MDFlatButton(
+                            text="CANCEL",
+                            theme_text_color="Custom",
+                            on_press=self.on_cancel
+                        ),
+                        MDFlatButton(
+                            text="OK",
+                            theme_text_color="Custom",
+                            on_press=self.on_add_ok
+                        ),
+                    ],
+                )
+            else:
+                self.dialog = MDDialog(
+                    title="Form",
+                    type="custom",
+                    content_cls=MDBoxLayout(
+                        MDTextField(
+                            id="input_a",
+                            hint_text="A",
+                            text=str(current_row_data[0]),
+                        ),
+                        MDTextField(
+                            id="input_b",
+                            hint_text="S",
+                            text=str(current_row_data[1]),
+                        ),
+                        MDTextField(
+                            id="input_c",
+                            hint_text="D",
+                            text=str(current_row_data[2]),
+                        ),
+                        orientation="vertical",
+                        spacing="12dp",
+                        size_hint_y=None,
+                        height="180dp",
                     ),
-                    MDTextField(
-                        id="input_c",
-                        hint_text="D",
-                        text=str(current_row_data[2]),
-                    ),
-                    orientation="vertical",
-                    spacing="12dp",
-                    size_hint_y=None,
-                    height="180dp",
-                ),
-                buttons=[
-                    MDFlatButton(
-                        text="CANCEL",
-                        theme_text_color="Custom",
-                        on_press=self.on_cancel
-                    ),
-                    MDFlatButton(
-                        text="OK",
-                        theme_text_color="Custom",
-                        on_press=self.on_edit_ok
-                    ),
-                ],
-            )
+                    buttons=[
+                        MDFlatButton(
+                            text="CANCEL",
+                            theme_text_color="Custom",
+                            on_press=self.on_cancel
+                        ),
+                        MDFlatButton(
+                            text="OK",
+                            theme_text_color="Custom",
+                            on_press=self.on_edit_ok
+                        ),
+                    ],
+                )
             self.dialog.open()
 
     def remove_data_pressed(self, button):
